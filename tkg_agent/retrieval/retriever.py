@@ -11,7 +11,7 @@ injected directly into the agent's system prompt or thought prefix.
 """
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 from typing import Optional
 
 from tkg_agent.graph.neo4j_client import Neo4jClient
@@ -77,7 +77,7 @@ class TKGRetriever:
         If since_timestamp is None, uses now - window_minutes.
         """
         if since_timestamp is None:
-            since_dt = datetime.utcnow() - timedelta(minutes=self.window_minutes)
+            since_dt = datetime.now(UTC) - timedelta(minutes=self.window_minutes)
             since_timestamp = since_dt.strftime("%Y-%m-%d %H:%M:%S")
 
         rows = self.db.get_recently_changed(since_timestamp, limit=limit)
@@ -105,7 +105,7 @@ class TKGRetriever:
         entity_id = f"device:{device_id}" if not device_id.startswith("device:") else device_id
 
         if since_timestamp is None:
-            since_dt = datetime.utcnow() - timedelta(minutes=self.window_minutes)
+            since_dt = datetime.now(UTC)- timedelta(minutes=self.window_minutes)
             since_timestamp = since_dt.strftime("%Y-%m-%d %H:%M:%S")
 
         rows = self.db.get_recent_facts(entity_id, relation, since_timestamp)

@@ -5,7 +5,7 @@ Handles connection, schema constraints, and all write/read operations.
 from __future__ import annotations
 
 import os
-from datetime import datetime
+from datetime import datetime,UTC
 from typing import Any, Optional
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
@@ -38,9 +38,9 @@ class Neo4jClient:
     def __exit__(self, *args):
         self.close()
 
-    def run(self, query: str, **params) -> list[dict]:
+    def run(self, cypher: str, **params) -> list[dict]:
         with self._driver.session() as session:
-            result = session.run(query, **params)
+            result = session.run(cypher, **params)
             return [dict(r) for r in result]
 
     # ── Schema setup ──────────────────────────────────────────────────────────
@@ -134,16 +134,17 @@ class Neo4jClient:
     def write_episode(
         self,
         episode_id: str,
-        query: str,
+        task_query: str,
         query_type: str,
-        case: str,
+        case: str,  
         user_location: str,
         base_time: str,
     ) -> None:
+
         self.run(
             """
             MERGE (ep:Episode {episode_id: $episode_id})
-            SET ep.query         = $query,
+            SET ep.task_query    = $task_text,
                 ep.query_type    = $query_type,
                 ep.case          = $case,
                 ep.user_location = $user_location,
@@ -151,14 +152,13 @@ class Neo4jClient:
                 ep.created_at    = $now
             """,
             episode_id=episode_id,
-            query=query,
+            task_text=task_query,
             query_type=query_type,
             case=case,
             user_location=user_location,
             base_time=base_time,
-            now=datetime.utcnow().isoformat(),
+            now=datetime.now(UTC).isoformat(),
         )
-
     # ── Retrieval: current state ──────────────────────────────────────────────
 
     def get_latest_fact(self, entity_id: str, relation: str) -> Optional[dict]:
@@ -273,141 +273,3 @@ class Neo4jClient:
             return True
         except Exception:
             return False
-
-if __name__ == "__main__":
-
-    print("\n=== SimuHome TKG Neo4j Client Test ===\n")
-
-    with Neo4jClient() as client:
-
-        # ── Health check ──────────────────────────────────────────────
-        print("[1] Checking Neo4j connection...")
-
-        if client.health_check():
-            print("✅ Neo4j connection successful\n")
-        else:
-            print("❌ Neo4j connection failed")
-            raise SystemExit(1)
-
-        # ── Create schema constraints ────────────────────────────────
-        print("[2] Creating constraints/indexes...")
-        client.create_constraints()
-        print("✅ Constraints ready\n")
-
-        # ── Create entities ──────────────────────────────────────────
-        print("[3] Creating entities...")
-
-        client.upsert_entity(
-            entity_id="room_bedroom",
-            entity_type="room",
-            display_name="Bedroom"
-        )
-
-        client.upsert_entity(
-            entity_id="device_bedroom_ac",
-            entity_type="device",
-            display_name="Bedroom AC"
-        )
-
-        client.upsert_entity(
-            entity_id="user_resident_1",
-            entity_type="user",
-            display_name="Resident 1"
-        )
-
-        print("✅ Entities created\n")
-
-        # ── Create episode ───────────────────────────────────────────
-        print("[4] Writing episode metadata...")
-
-        episode_id = "qt1_test_episode"
-
-        client.write_episode(
-            episode_id=episode_id,
-            query="Turn on the AC if bedroom temperature exceeds 28C",
-            query_type="qt1",
-            case="feasible",
-            user_location="bedroom",
-            base_time=datetime.utcnow().isoformat(),
-        )
-
-        print("✅ Episode written\n")
-
-        # ── Write temporal facts ─────────────────────────────────────
-        print("[5] Writing temporal facts...")
-
-        now = datetime.utcnow().isoformat()
-
-        client.write_fact(
-            subject_id="room_bedroom",
-            relation="temperature",
-            value="29.8C",
-            timestamp=now,
-            episode_id=episode_id,
-            step_id=1,
-        )
-
-        client.write_fact(
-            subject_id="room_bedroom",
-            relation="illuminance",
-            value="681_lux",
-            timestamp=now,
-            episode_id=episode_id,
-            step_id=1,
-        )
-
-        client.write_fact(
-            subject_id="device_bedroom_ac",
-            relation="is_on",
-            value="false",
-            timestamp=now,
-            episode_id=episode_id,
-            step_id=1,
-        )
-
-        client.write_fact(
-            subject_id="user_resident_1",
-            relation="located_in",
-            value="room_bedroom",
-            timestamp=now,
-            episode_id=episode_id,
-            step_id=1,
-        )
-
-        print("✅ Facts written\n")
-
-        # ── Test latest fact retrieval ───────────────────────────────
-        print("[6] Retrieving latest temperature fact...\n")
-
-        latest_temp = client.get_latest_fact(
-            entity_id="room_bedroom",
-            relation="temperature",
-        )
-
-        print(latest_temp)
-        print()
-
-        # ── Test entity snapshot ─────────────────────────────────────
-        print("[7] Retrieving room snapshot...\n")
-
-        snapshot = client.get_entity_snapshot("room_bedroom")
-
-        for row in snapshot:
-            print(row)
-
-        print()
-
-        # ── Test recent changes ──────────────────────────────────────
-        print("[8] Retrieving recent changes...\n")
-
-        recent = client.get_recently_changed(
-            since_timestamp="2000-01-01T00:00:00",
-            limit=20,
-        )
-
-        for row in recent:
-            print(row)
-
-        print()
-
-        print("🎉 TKG client test completed successfully!\n")
