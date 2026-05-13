@@ -11,7 +11,7 @@ injected directly into the agent's system prompt or thought prefix.
 """
 from __future__ import annotations
 
-from datetime import datetime, timedelta, UTC
+from datetime import datetime, timedelta
 from typing import Optional
 
 from tkg_agent.graph.neo4j_client import Neo4jClient
@@ -77,7 +77,7 @@ class TKGRetriever:
         If since_timestamp is None, uses now - window_minutes.
         """
         if since_timestamp is None:
-            since_dt = datetime.now(UTC) - timedelta(minutes=self.window_minutes)
+            since_dt = datetime.utcnow() - timedelta(minutes=self.window_minutes)
             since_timestamp = since_dt.strftime("%Y-%m-%d %H:%M:%S")
 
         rows = self.db.get_recently_changed(since_timestamp, limit=limit)
@@ -105,7 +105,7 @@ class TKGRetriever:
         entity_id = f"device:{device_id}" if not device_id.startswith("device:") else device_id
 
         if since_timestamp is None:
-            since_dt = datetime.now(UTC)- timedelta(minutes=self.window_minutes)
+            since_dt = datetime.utcnow() - timedelta(minutes=self.window_minutes)
             since_timestamp = since_dt.strftime("%Y-%m-%d %H:%M:%S")
 
         rows = self.db.get_recent_facts(entity_id, relation, since_timestamp)
@@ -172,14 +172,15 @@ class TKGRetriever:
 
     def find_devices_in_room(self, room_id: str) -> list[str]:
         """Return all device entity_ids that are located_in a given room."""
+        # Normalise: accept both "bathroom" and "room:bathroom"
+        room_val = f"room:{room_id}" if not room_id.startswith("room:") else room_id
         rows = self.db.run(
             """
-            MATCH (d:Entity {entity_type: 'device'})-[:HAS_FACT {relation: 'located_in'}]->(f:Fact)
-            WHERE f.value = $room_val
-            WITH d.entity_id AS eid, f.timestamp AS ts
-            ORDER BY ts DESC
-            RETURN DISTINCT eid
+            MATCH (d:Entity {entity_type: 'device'})-[:HAS_FACT]->(f:Fact)
+            WHERE f.relation = 'located_in'
+              AND f.value    = $room_val
+            RETURN DISTINCT d.entity_id AS eid
             """,
-            room_val=f"room:{room_id}",
+            room_val=room_val,
         )
         return [r["eid"] for r in rows]

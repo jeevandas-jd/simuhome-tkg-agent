@@ -22,7 +22,7 @@ class Neo4jClient:
         user: Optional[str] = None,
         password: Optional[str] = None,
     ):
-        self.uri = uri or os.getenv("NEO4J_URI", "bolt://localhost:7687")
+        self.uri = uri or os.getenv("NEO4J_URI", "http://localhost:7474")
         self.user = user or os.getenv("NEO4J_USER", "neo4j")
         self.password = password or os.getenv("NEO4J_PASSWORD", "neo4j")
         self._driver = GraphDatabase.driver(

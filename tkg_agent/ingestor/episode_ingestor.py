@@ -67,7 +67,7 @@ class EpisodeIngestor:
         # Write episode node
         self.db.write_episode(
             episode_id=episode_id,
-            query=episode["query"],
+            task_query=episode["query"],
             query_type=meta["query_type"],
             case=meta["case"],
             user_location=episode["user_location"],
@@ -309,6 +309,11 @@ class EpisodeIngestor:
 
     def _flatten_endpoints(self, endpoints: dict) -> dict[str, Any]:
         """Extract readable key attributes from get_device_structure response."""
+        NORMALIZED_ATTRS = {
+        "OnOff.OnOff": "is_on",
+        "Thermostat.LocalTemperature": "temperature",
+        "FanControl.FanMode": "fan_mode",
+        }       
         result = {}
         for ep_id, ep_data in endpoints.items():
             clusters = ep_data.get("clusters", {})
@@ -316,7 +321,13 @@ class EpisodeIngestor:
                 attributes = cluster_data.get("attributes", {})
                 for attr_name, attr_info in attributes.items():
                     if isinstance(attr_info, dict) and "value" in attr_info:
-                        relation = f"{cluster_name}.{attr_name}".lower().replace(" ", "_")
+                        raw_relation = f"{cluster_name}.{attr_name}"
+
+                        relation = NORMALIZED_ATTRS.get(
+                            raw_relation,
+                            raw_relation.lower().replace(" ", "_")
+                        )
+
                         result[relation] = attr_info["value"]
         return result
 
