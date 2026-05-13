@@ -142,9 +142,11 @@ class TKGReActAgent(BaseReActAgent):
                 task_rooms.append(loc)
 
         # ── Build base messages ───────────────────────────────────────────
+
+        base_system=SYSTEM_PROMPT.format(tools=_render_tool_table())
         system_msg = {
             "role": "system",
-            "content": SYSTEM_PROMPT.format(tools=_render_tool_table()),
+            "content": base_system,
         }
         user_msg = {
             "role": "user",
@@ -154,25 +156,8 @@ class TKGReActAgent(BaseReActAgent):
                 current_time=current_time or "unknown",
             ),
         }
-        initial_grounding = self._retrieve(
-         room_ids=task_rooms,
-        device_ids=[],
-        current_time=current_time,
-)
 
-        if initial_grounding:
-            messages = [
-                system_msg,
-                {
-                    "role": "system",
-                    "content": TKG_REMINDER.format(
-                        grounding_block=initial_grounding
-                    ),
-                },
-                user_msg,
-            ]
-        else:
-            messages = [system_msg, user_msg]
+        messages = [system_msg, user_msg]
         
 
         steps: list[AgentStep] = []
@@ -180,7 +165,13 @@ class TKGReActAgent(BaseReActAgent):
         final_answer = ""
         consecutive_failures = 0
 
+        #preextract rooms mentioned in the task
+        task_rooms=_extract_rooms_from_text(user_query)
 
+        if user_location:
+            loc=user_location.replace("room:","")
+            if loc not in task_rooms:
+                task_rooms.append(loc)
         for step_idx in range(1, self.max_steps + 1):
 
             # ── RETRIEVAL STEP (before every LLM call) ────────────────────
@@ -189,10 +180,18 @@ class TKGReActAgent(BaseReActAgent):
 
             if grounding:
                 # Inject as a user turn so it's in the conversation history
-                messages.append({
-                    "role": "user",
-                    "content": TKG_REMINDER.format(grounding_block=grounding),
-                })
+                messages[0]={
+                    "role":"system",
+                    "content":base_system + """"
+
+                    [TKG GRAPH MEMORY — pre-loaded facts from home state, verified and timestamped]
+                    IMPORTANT: If the answer to the user query is already present in the graph facts
+                    below, respond with action=\\\"finish\\\" immediately without calling any tool.
+                    Only call a tool if the specific fact you need is NOT in this memory block."""
+
+                    + grounding + """
+                    [END TKG GRAPH MEMORY]""",
+                }
 
             # ── LLM call ──────────────────────────────────────────────────
             try:
