@@ -134,6 +134,12 @@ class TKGReActAgent(BaseReActAgent):
         if episode:
             episode_id = self.ingestor.bootstrap(episode)
             self._log("tkg_bootstrap", f"Bootstrapped episode {episode_id}")
+        # Pre-extract rooms mentioned in the task
+        task_rooms = _extract_rooms_from_text(user_query)
+        if user_location:
+            loc = user_location.replace("room:", "")
+            if loc not in task_rooms:
+                task_rooms.append(loc)
 
         # ── Build base messages ───────────────────────────────────────────
         system_msg = {
@@ -148,19 +154,32 @@ class TKGReActAgent(BaseReActAgent):
                 current_time=current_time or "unknown",
             ),
         }
-        messages = [system_msg, user_msg]
+        initial_grounding = self._retrieve(
+         room_ids=task_rooms,
+        device_ids=[],
+        current_time=current_time,
+)
+
+        if initial_grounding:
+            messages = [
+                system_msg,
+                {
+                    "role": "system",
+                    "content": TKG_REMINDER.format(
+                        grounding_block=initial_grounding
+                    ),
+                },
+                user_msg,
+            ]
+        else:
+            messages = [system_msg, user_msg]
+        
 
         steps: list[AgentStep] = []
         raw_responses: list[str] = []
         final_answer = ""
         consecutive_failures = 0
 
-        # Pre-extract rooms mentioned in the task
-        task_rooms = _extract_rooms_from_text(user_query)
-        if user_location:
-            loc = user_location.replace("room:", "")
-            if loc not in task_rooms:
-                task_rooms.append(loc)
 
         for step_idx in range(1, self.max_steps + 1):
 

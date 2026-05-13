@@ -158,17 +158,17 @@ def call_simulator_tool(tool_name: str, params: dict) -> dict:
     Maps tool names to HTTP endpoints.
     """
     url_map = {
-        "get_rooms":                    ("GET",  "/rooms"),
-        "get_room_devices":             ("GET",  f"/rooms/{params.get('room_id','')}/devices"),
-        "get_room_states":              ("GET",  f"/rooms/{params.get('room_id','')}/states"),
-        "get_device_structure":         ("GET",  f"/devices/{params.get('device_id','')}/structure"),
-        "get_cluster_doc":              ("GET",  f"/clusters/{params.get('cluster_id','')}/doc"),
-        "get_current_time":             ("GET",  "/time"),
-        "get_environment_control_rules":("POST", "/environment/control-rules"),
-        "write_attribute":              ("POST", "/devices/attribute"),
-        "execute_command":              ("POST", "/devices/command"),
-        "schedule_workflow":            ("POST", "/workflows"),
-        "get_workflow_status":          ("GET",  f"/workflows/{params.get('workflow_id','')}"),
+        "get_rooms":                    ("GET",  "/api/rooms"),
+        "get_room_devices":             ("GET",  f"/api/rooms/{params.get('room_id','')}/devices"),
+        "get_room_states":              ("GET",  f"/api/rooms/{params.get('room_id','')}/states"),
+        "get_device_structure":         ("GET",  f"/api/devices/{params.get('device_id','')}/structure"),
+        "get_cluster_doc":              ("GET",  f"/api/clusters/{params.get('cluster_id','')}/doc"),
+        "get_current_time":             ("GET",  "/api/time"),
+        "get_environment_control_rules":("POST", "/api/environment/control-rules"),
+        "write_attribute":              ("POST", "/api/devices/attribute"),
+        "execute_command":              ("POST", "/api/devices/command"),
+        "schedule_workflow":            ("POST", "/api/workflows"),
+        "get_workflow_status":          ("GET",  f"/api/workflows/{params.get('workflow_id','')}"),
     }
 
     if tool_name not in url_map:

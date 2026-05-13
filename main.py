@@ -41,6 +41,27 @@ def _load_episode(path: str) -> dict:
         return json.load(f)
 
 
+def _load_episode_into_simulator(episode: dict) -> bool:
+    """POST initial_home_config directly to simulator reset endpoint."""
+    import requests, os
+    base = os.getenv("SIMULATOR_BASE", "http://localhost:8000")
+    try:
+        resp = requests.post(
+            f"{base}/api/simulation/reset",
+            json=episode["initial_home_config"],   # SimulationConfig = initial_home_config directly
+            timeout=15,
+        )
+        if resp.status_code == 200:
+            console.print("[dim]  Simulator loaded with episode home config ✅[/dim]")
+            return True
+        else:
+            console.print(f"[yellow]  Simulator reset returned {resp.status_code}: {resp.text[:120]}[/yellow]")
+            return False
+    except Exception as e:
+        console.print(f"[red]  Could not reset simulator: {e}[/red]")
+        return False
+
+
 def _make_llm():
     from tkg_agent.agent.groq_provider import GroqProvider
     return GroqProvider()
@@ -116,6 +137,7 @@ def run(
     """Run a single agent (TKG or baseline) on one episode."""
     ep = _load_episode(episode)
     _print_episode_header(ep)
+    _load_episode_into_simulator(ep)
 
     llm = _make_llm()
 
@@ -167,6 +189,7 @@ def compare(
     """Run both baseline and TKG agent on the same episode and compare."""
     ep = _load_episode(episode)
     _print_episode_header(ep)
+    _load_episode_into_simulator(ep)
 
     llm = _make_llm()
 
