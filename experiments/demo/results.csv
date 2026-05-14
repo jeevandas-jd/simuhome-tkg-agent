@@ -1,19 +1,3 @@
 episode_id,query_type,case,seed,agent,success,steps,final_answer,graph_hits,graph_misses,facts_written,error
-qt1_feasible_seed1,qt1,feasible,1,baseline,True,10,"The utility room's light is off. The bathroom's window covering is fully open, allowing natural light to enter the room.",0,0,0,
-qt1_feasible_seed1,qt1,feasible,1,tkg,True,3,"The utility room is well-lit with an illuminance of 681.81 lux, while the bathroom is a bit dim with an illuminance of 1",3,0,8,
-qt1_feasible_seed10,qt1,feasible,10,baseline,True,2,The current humidity in the office is 52.61%,0,0,0,
-qt1_feasible_seed10,qt1,feasible,10,tkg,True,1,52.62%,1,0,0,
-qt1_feasible_seed11,qt1,feasible,11,baseline,True,4,"The current illuminance in the living room is 1102.55 lux. The safety status of blinds 1 in the utility room is 0, indic",0,0,0,
-qt1_feasible_seed11,qt1,feasible,11,tkg,True,5,There is no safety alert on blinds 1 in the utility room. The current brightness in the living room is 1102.55 lux.,5,0,45,
-qt1_feasible_seed12,qt1,feasible,12,baseline,True,5,The refrigerator temperature is 7.00°C and the air quality in the kitchen is 56.16 µg/m³.,0,0,0,
-qt1_feasible_seed12,qt1,feasible,12,tkg,True,4,The refrigerator 1 is at a temperature of 7.00°C and the air quality in the kitchen is currently 56.16 µg/m³ PM10.,4,0,31,
-qt1_feasible_seed13,qt1,feasible,13,baseline,True,6,The fade has finished.,0,0,0,
-qt1_feasible_seed13,qt1,feasible,13,tkg,True,3,0 seconds,3,0,33,
-qt4-1_feasible_seed1,qt4-1,feasible,1,baseline,False,0,,0,0,0,LLM call failed at step 7: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt4-1_feasible_seed1,qt4-1,feasible,1,tkg,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt4-1_feasible_seed10,qt4-1,feasible,10,baseline,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt4-1_feasible_seed10,qt4-1,feasible,10,tkg,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt4-1_feasible_seed11,qt4-1,feasible,11,baseline,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt4-1_feasible_seed11,qt4-1,feasible,11,tkg,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt1_feasible_seed14,qt1,feasible,14,baseline,False,0,,0,0,0,LLM call failed at step 2: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
-qt1_feasible_seed14,qt1,feasible,14,tkg,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 4 attempts: Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-ver
+qt1_feasible_seed1,qt1,feasible,1,baseline,True,10,"The utility room is currently brighter than the bathroom, with an illuminance of 681.81 lux compared to the bathroom's 1",0,0,0,
+qt1_feasible_seed1,qt1,feasible,1,tkg,True,3,"The utility room is nicely lit with an illuminance of 681.81 lux, while the bathroom is a bit dim with an illuminance of",3,0,8,

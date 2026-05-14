@@ -16,7 +16,7 @@ Usage examples:
   python main.py health
 """
 from __future__ import annotations
-
+import os
 import json
 import sys
 from pathlib import Path
@@ -66,7 +66,14 @@ def _make_llm():
     from tkg_agent.agent.groq_provider import GroqProvider
     return GroqProvider()
 
+"""def _make_llm():
 
+    from tkg_agent.agent.kaggle_provider import KaggleProvider
+
+    return KaggleProvider(
+        endpoint=os.getenv("KAGGLE_ENDPINT")
+    )
+"""
 def _make_db():
     from tkg_agent.graph.neo4j_client import Neo4jClient
     db = Neo4jClient()
