@@ -104,14 +104,25 @@ Generate ONLY this JSON on every turn, then stop:
 [AVAILABLE TOOLS]
 {tools}
 
-[RULES]
-- NEVER fabricate device IDs, room IDs, or values — always verify via tools.
+[CRITICAL TOOL RULES]
+- room_id must be plain string: "bathroom" NOT "room:bathroom"
+- device_id must be plain string: "bathroom_ac_1" NOT "device:bathroom_ac_1"
+- Always call get_room_devices before using any device_id.
+- For any timed/scheduled action, ALWAYS call get_current_time FIRST.
+- OnOff.OnOff attribute is READ-ONLY — use execute_command with command_id="On" or "Off".
+- Brightness: use execute_command with cluster_id="LevelControl" command_id="MoveToLevelWithOnOff" command_fields={{"level": <0-254>, "transitionTime": 0}}.
+
+[SCHEDULE WORKFLOW FORMAT]
+action_input must be:
+{{"start_time": "YYYY-MM-DD HH:MM:SS", "steps": [{{"tool": "execute_command", "args": {{"device_id": "...", "endpoint_id": 1, "cluster_id": "OnOff", "command_id": "On", "command_fields": {{}}}}}}]}}
+- "steps" key required (NOT "tool_call")
+- start_time must be a FUTURE simulator time (use get_current_time + offset)
+
+[UNIT CONVERSIONS]
 - Temperature raw ÷ 100 = °C (2950 = 29.50°C)
 - Humidity raw ÷ 100 = % (4502 = 45.02%)
-- Illuminance = direct lux
-- PM10 = direct µg/m³
-- Always call get_room_devices before using any device_id.
-- For scheduled actions, always call get_current_time first.
+- Illuminance = direct lux | PM10 = direct µg/m³
+- Brightness level: percent × 2.54 rounded (70% = 178, 60% = 153)
 """
 
 USER_PROMPT = """[TASK]
@@ -152,43 +163,97 @@ class AgentResult:
 
 # ── HTTP tool runner ──────────────────────────────────────────────────────────
 
+def _strip_prefix(val: str, prefix: str) -> str:
+    """Remove a prefix like 'room:' from IDs the LLM accidentally includes."""
+    return val[len(prefix):] if val.startswith(prefix) else val
+
+
 def call_simulator_tool(tool_name: str, params: dict) -> dict:
     """
     Call the SimuHome simulator REST API.
-    Maps tool names to HTTP endpoints.
+    All routes confirmed from GET /api/openapi.json.
+
+    Key facts:
+      - room_id must NOT have 'room:' prefix
+      - schedule_workflow body: {start_time, steps: [{tool, args}]}
+        'steps' key (NOT 'tool_call')
+      - execute_command body: {endpoint_id, cluster_id, command_id, command_fields}
+      - write_attribute body: {endpoint_id, cluster_id, attribute_id, value}
+      - start_time must be a future simulator time
     """
-    url_map = {
-        "get_rooms":                    ("GET",  "/api/rooms"),
-        "get_room_devices":             ("GET",  f"/api/rooms/{params.get('room_id','')}/devices"),
-        "get_room_states":              ("GET",  f"/api/rooms/{params.get('room_id','')}/states"),
-        "get_device_structure":         ("GET",  f"/api/devices/{params.get('device_id','')}/structure"),
-        "get_cluster_doc":              ("GET",  f"/api/clusters/{params.get('cluster_id','')}/doc"),
-        "get_current_time":             ("GET",  "/api/time"),
-        "get_environment_control_rules":("POST", "/api/environment/control-rules"),
-        "write_attribute":              ("POST", "/api/devices/attribute"),
-        "execute_command":              ("POST", "/api/devices/command"),
-        "schedule_workflow":            ("POST", "/api/workflows"),
-        "get_workflow_status":          ("GET",  f"/api/workflows/{params.get('workflow_id','')}"),
+    B = SIMULATOR_BASE + "/api"
+
+    # Strip accidental prefixes the LLM may add
+    room_id     = _strip_prefix(params.get("room_id", ""),    "room:")
+    device_id   = _strip_prefix(params.get("device_id", ""),  "device:")
+    workflow_id = params.get("workflow_id", "")
+    state       = params.get("state", "")
+
+    # Fix schedule_workflow: rename tool_call -> steps if LLM used old key
+    def _fix_schedule_body(p: dict) -> dict:
+        body = {k: v for k, v in p.items()}
+        if "tool_call" in body and "steps" not in body:
+            body["steps"] = body.pop("tool_call")
+        # Ensure steps items use correct keys
+        steps = body.get("steps", [])
+        fixed = []
+        for s in steps:
+            step = dict(s)
+            # LLM sometimes uses 'args', API expects 'args' — both fine
+            # Strip room:/device: prefixes inside step args too
+            if "args" in step:
+                a = dict(step["args"])
+                if "room_id" in a:
+                    a["room_id"] = _strip_prefix(a["room_id"], "room:")
+                if "device_id" in a:
+                    a["device_id"] = _strip_prefix(a["device_id"], "device:")
+                step["args"] = a
+            fixed.append(step)
+        body["steps"] = fixed
+        return body
+
+    # (method, url, body_dict)
+    routes: dict[str, tuple] = {
+        "get_rooms":          ("GET",  f"{B}/rooms",                                   None),
+        "get_room_devices":   ("GET",  f"{B}/rooms/{room_id}/devices",                 None),
+        "get_room_states":    ("GET",  f"{B}/rooms/{room_id}/states",                  None),
+        "get_device_structure":("GET", f"{B}/devices/{device_id}/structure",           None),
+        "get_cluster_doc":    ("GET",  f"{B}/devices/{device_id}/attributes",          None),
+        "get_current_time":   ("GET",  f"{B}/time",                                    None),
+        "get_workflow_status":("GET",  f"{B}/schedule/workflow/{workflow_id}/status",  None),
+        "get_environment_control_rules": (
+            "GET", f"{B}/environment/control_rules/{state}", None
+        ),
+        "write_attribute": (
+            "POST", f"{B}/devices/{device_id}/attributes/write",
+            {k: v for k, v in params.items() if k not in {"device_id", "room_id"}},
+        ),
+        "execute_command": (
+            "POST", f"{B}/devices/{device_id}/commands",
+            {k: v for k, v in params.items() if k not in {"device_id", "room_id"}},
+        ),
+        "schedule_workflow": (
+            "POST", f"{B}/schedule/workflow",
+            _fix_schedule_body(params),
+        ),
     }
 
-    if tool_name not in url_map:
+    if tool_name not in routes:
         return {"status": {"code": 400}, "error": f"Unknown tool: {tool_name}", "data": None}
 
-    method, path = url_map[tool_name]
-    url = SIMULATOR_BASE + path
-
-    # Params that are already in the path don't need to be sent again
-    path_params = {"room_id", "device_id", "cluster_id", "workflow_id"}
-    body_params = {k: v for k, v in params.items() if k not in path_params}
-
+    method, url, body = routes[tool_name]
     try:
         if method == "GET":
-            resp = requests.get(url, timeout=10)
+            resp = requests.get(url, timeout=15)
         else:
-            resp = requests.post(url, json=body_params, timeout=10)
+            resp = requests.post(url, json=body or {}, timeout=15)
         return resp.json()
     except requests.exceptions.ConnectionError:
-        return {"status": {"code": 503}, "error": "Simulator not reachable", "data": None}
+        return {
+            "status": {"code": 503},
+            "error": "Simulator not reachable — run: uv run simuhome server-start",
+            "data": None,
+        }
     except Exception as e:
         return {"status": {"code": 500}, "error": str(e), "data": None}
 

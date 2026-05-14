@@ -52,7 +52,7 @@ def _load_episode_into_simulator(episode: dict) -> bool:
             timeout=15,
         )
         if resp.status_code == 200:
-            console.print("[dim]  Simulator loaded with episode home config ✅[/dim]")
+            console.print("[dim]  Simulator loaded with episode home config [/dim]")
             return True
         else:
             console.print(f"[yellow]  Simulator reset returned {resp.status_code}: {resp.text[:120]}[/yellow]")
@@ -114,18 +114,18 @@ def health():
     try:
         db = _make_db()
         ok = db.health_check()
-        console.print(f"  Neo4j: {'[green]✅ connected[/green]' if ok else '[red]❌ failed[/red]'}")
+        console.print(f"  Neo4j: {'[green] connected[/green]' if ok else '[red] failed[/red]'}")
         db.close()
     except Exception as e:
-        console.print(f"  Neo4j: [red]❌ {e}[/red]")
+        console.print(f"  Neo4j: [red] {e}[/red]")
 
     console.print("\n[bold]Checking Groq...[/bold]")
     try:
         llm = _make_llm()
         resp = llm.generate([{"role": "user", "content": "Reply with: ready"}])
-        console.print(f"  Groq:  [green]✅ {resp[:60]}[/green]")
+        console.print(f"  Groq:  [green] {resp[:60]}[/green]")
     except Exception as e:
-        console.print(f"  Groq:  [red]❌ {e}[/red]")
+        console.print(f"  Groq:  [red] {e}[/red]")
 
 
 @app.command()
@@ -242,8 +242,8 @@ def compare(
     t_steps = len(tkg_result.steps)      if tkg_ok     else "—"
     table.add_row("Steps taken",         str(b_steps), str(t_steps))
     table.add_row("Finished cleanly",
-                  "✅" if baseline_ok else "❌",
-                  "✅" if tkg_ok else "❌")
+                  "YES" if baseline_ok else "NO",
+                  "YES" if tkg_ok else "NO")
     table.add_row("TKG graph hits",      "—", str(tkg_metrics.get("graph_hits", "—")))
     table.add_row("TKG graph misses",    "—", str(tkg_metrics.get("graph_misses", "—")))
     table.add_row("Facts written",       "—", str(tkg_metrics.get("facts_written", "—")))
