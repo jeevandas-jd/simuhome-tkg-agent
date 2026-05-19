@@ -1,0 +1,1417 @@
+{
+  "meta": {
+    "seed": 26,
+    "query_type": "qt1",
+    "case": "infeasible",
+    "num_rooms": 5,
+    "num_devices": 23,
+    "num_target_device_attributes": 1,
+    "num_target_room_states": 0
+  },
+  "query": "I was about to get the table ready for lunch how is the power status of light 1 in the dining room right now?",
+  "user_location": "utility_room",
+  "eval": {
+    "required_actions": [
+      {
+        "tool": "get_room_devices",
+        "params": {
+          "room_id": "dining_room"
+        }
+      }
+    ],
+    "goals": [
+      {
+        "variant": "device_attribute",
+        "room_id": "dining_room",
+        "device_id": "dining_room_on_off_light_1",
+        "device_type": "on_off_light",
+        "attribute": "1.OnOff.OnOff"
+      }
+    ]
+  },
+  "initial_home_config": {
+    "tick_interval": 0.1,
+    "base_time": "2025-08-23 12:42:13",
+    "rooms": {
+      "bathroom": {
+        "devices": [
+          {
+            "device_id": "bathroom_air_conditioner_1",
+            "device_type": "air_conditioner",
+            "attributes": {
+              "0.BasicInformation.ProductID": 1,
+              "0.BasicInformation.ProductName": "Air Conditioner",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 0,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 0,
+              "1.FanControl.PercentSetting": 0,
+              "1.OnOff.OnOff": true,
+              "1.Thermostat.ControlSequenceOfOperation": 4,
+              "1.Thermostat.LocalTemperature": 2977,
+              "1.Thermostat.OccupiedCoolingSetpoint": 2000,
+              "1.Thermostat.OccupiedHeatingSetpoint": 2800,
+              "1.Thermostat.SystemMode": 3
+            }
+          },
+          {
+            "device_id": "bathroom_air_purifier_1",
+            "device_type": "air_purifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Air Purifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [],
+              "1.FanControl.FanMode": 3,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 80,
+              "1.FanControl.PercentSetting": 80,
+              "1.Identify.ClusterRevision": 5,
+              "1.Identify.FeatureMap": 0,
+              "1.Identify.IdentifyTime": 0,
+              "1.Identify.IdentifyType": 2,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "bathroom_heat_pump_1",
+            "device_type": "heat_pump",
+            "attributes": {
+              "0.BasicInformation.ProductID": 777,
+              "0.BasicInformation.ProductName": "Heat Pump",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Heat Pump",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [
+                "Grid"
+              ],
+              "1.PowerSource.ActiveWiredFaults": [],
+              "1.PowerSource.ClusterRevision": 3,
+              "1.PowerSource.Description": "AC Grid Connection",
+              "1.PowerSource.EndpointList": [],
+              "1.PowerSource.FeatureMap": 1,
+              "1.PowerSource.Order": 0,
+              "1.PowerSource.Status": 2,
+              "1.PowerSource.WiredAssessedCurrent": null,
+              "1.PowerSource.WiredAssessedInputFrequency": null,
+              "1.PowerSource.WiredAssessedInputVoltage": 220000,
+              "1.PowerSource.WiredCurrentType": 0,
+              "1.PowerSource.WiredMaximumCurrent": 0,
+              "1.PowerSource.WiredNominalVoltage": 220000,
+              "1.PowerSource.WiredPresent": true,
+              "2.Descriptor.ClientList": [],
+              "2.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "2.Descriptor.PartsList": [],
+              "2.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "2.Descriptor.TagList": [
+                "ElectricalSensor"
+              ],
+              "2.ElectricalEnergyMeasurement.Accuracy": {
+                "MeasurementType": 0,
+                "Measured": true,
+                "MinMeasuredValue": 0,
+                "MaxMeasuredValue": 4611686018427387904,
+                "AccuracyRanges": [
+                  {
+                    "RangeMin": 0,
+                    "RangeMax": 4611686018427387904,
+                    "PercentMax": 500,
+                    "PercentMin": 100,
+                    "PercentTypical": 200,
+                    "FixedMax": null,
+                    "FixedMin": null,
+                    "FixedTypical": null
+                  }
+                ]
+              },
+              "2.ElectricalEnergyMeasurement.ClusterRevision": 1,
+              "2.ElectricalEnergyMeasurement.CumulativeEnergyImported": null,
+              "2.ElectricalEnergyMeasurement.FeatureMap": 13,
+              "2.ElectricalEnergyMeasurement.PeriodicEnergyImported": null,
+              "2.ElectricalPowerMeasurement.Accuracy": [
+                {
+                  "MeasurementType": 1,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 2,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 5,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 7,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 8,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 9,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 10,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 11,
+                  "Measured": true,
+                  "MinMeasuredValue": 0,
+                  "MaxMeasuredValue": 1000000,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": 0,
+                      "RangeMax": 1000000,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 12,
+                  "Measured": true,
+                  "MinMeasuredValue": -10000,
+                  "MaxMeasuredValue": 10000,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -10000,
+                      "RangeMax": 10000,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                }
+              ],
+              "2.ElectricalPowerMeasurement.ActiveCurrent": 15000,
+              "2.ElectricalPowerMeasurement.ActivePower": 3450000,
+              "2.ElectricalPowerMeasurement.ApparentPower": 3631580,
+              "2.ElectricalPowerMeasurement.ClusterRevision": 1,
+              "2.ElectricalPowerMeasurement.FeatureMap": 2,
+              "2.ElectricalPowerMeasurement.Frequency": 50000,
+              "2.ElectricalPowerMeasurement.NumberOfMeasurementTypes": 9,
+              "2.ElectricalPowerMeasurement.PowerFactor": 9500,
+              "2.ElectricalPowerMeasurement.PowerMode": 2,
+              "2.ElectricalPowerMeasurement.RMSCurrent": 15000,
+              "2.ElectricalPowerMeasurement.RMSPower": 3450000,
+              "2.ElectricalPowerMeasurement.RMSVoltage": 230000,
+              "2.ElectricalPowerMeasurement.Voltage": 230000,
+              "2.PowerTopology.ClusterRevision": 1,
+              "2.PowerTopology.FeatureMap": 1,
+              "3.Descriptor.ClientList": [],
+              "3.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "3.Descriptor.PartsList": [],
+              "3.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "3.Descriptor.TagList": [
+                "EnergyManagement"
+              ],
+              "3.DeviceEnergyManagement.AbsMaxPower": 8000000,
+              "3.DeviceEnergyManagement.AbsMinPower": 1000000,
+              "3.DeviceEnergyManagement.ESACanGenerate": false,
+              "3.DeviceEnergyManagement.ESAState": 0,
+              "3.DeviceEnergyManagement.ESAType": 1,
+              "3.DeviceEnergyManagement.PowerAdjustmentCapability": {
+                "power_adjust_capability": [],
+                "cause": 0
+              },
+              "4.Descriptor.ClientList": [],
+              "4.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "4.Descriptor.PartsList": [],
+              "4.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "4.Descriptor.TagList": [
+                "RoomThermostat"
+              ],
+              "4.Thermostat.ControlSequenceOfOperation": 4,
+              "4.Thermostat.LocalTemperature": 2977,
+              "4.Thermostat.OccupiedCoolingSetpoint": 2000,
+              "4.Thermostat.OccupiedHeatingSetpoint": 2800,
+              "4.Thermostat.SystemMode": 4
+            }
+          },
+          {
+            "device_id": "bathroom_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          }
+        ],
+        "state": {
+          "humidity": 4356.0,
+          "illuminance": 667.93,
+          "pm10": 20.0,
+          "temperature": 2977.0
+        }
+      },
+      "dining_room": {
+        "devices": [
+          {
+            "device_id": "dining_room_dehumidifier_1",
+            "device_type": "dehumidifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 7,
+              "0.BasicInformation.ProductName": "Dehumidifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 2,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 47,
+              "1.FanControl.PercentSetting": 47,
+              "1.OnOff.OnOff": true,
+              "2.RelativeHumidityMeasurement.MaxMeasuredValue": 9500,
+              "2.RelativeHumidityMeasurement.MeasuredValue": 4339,
+              "2.RelativeHumidityMeasurement.MinMeasuredValue": 1000,
+              "2.RelativeHumidityMeasurement.Tolerance": null
+            }
+          },
+          {
+            "device_id": "dining_room_dehumidifier_2",
+            "device_type": "dehumidifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 7,
+              "0.BasicInformation.ProductName": "Dehumidifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 1,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 8,
+              "1.FanControl.PercentSetting": 8,
+              "1.OnOff.OnOff": true,
+              "2.RelativeHumidityMeasurement.MaxMeasuredValue": 9500,
+              "2.RelativeHumidityMeasurement.MeasuredValue": 4339,
+              "2.RelativeHumidityMeasurement.MinMeasuredValue": 1000,
+              "2.RelativeHumidityMeasurement.Tolerance": null
+            }
+          },
+          {
+            "device_id": "dining_room_fan_1",
+            "device_type": "fan",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Fan",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 2,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 61,
+              "1.FanControl.PercentSetting": 61,
+              "1.OnOff.OnOff": true
+            }
+          }
+        ],
+        "state": {
+          "humidity": 4339.030226516235,
+          "illuminance": 836.35,
+          "pm10": 95.14,
+          "temperature": 2918.5103209937047
+        }
+      },
+      "kitchen": {
+        "devices": [
+          {
+            "device_id": "kitchen_air_conditioner_1",
+            "device_type": "air_conditioner",
+            "attributes": {
+              "0.BasicInformation.ProductID": 1,
+              "0.BasicInformation.ProductName": "Air Conditioner",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 0,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 0,
+              "1.FanControl.PercentSetting": 0,
+              "1.OnOff.OnOff": true,
+              "1.Thermostat.ControlSequenceOfOperation": 4,
+              "1.Thermostat.LocalTemperature": 2945,
+              "1.Thermostat.OccupiedCoolingSetpoint": 2000,
+              "1.Thermostat.OccupiedHeatingSetpoint": 2800,
+              "1.Thermostat.SystemMode": 3
+            }
+          },
+          {
+            "device_id": "kitchen_dimmable_light_1",
+            "device_type": "dimmable_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 3,
+              "0.BasicInformation.ProductName": "Dimmable Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.LevelControl.CurrentFrequency": 0,
+              "1.LevelControl.CurrentLevel": 111,
+              "1.LevelControl.DefaultMoveRate": null,
+              "1.LevelControl.MaxFrequency": 0,
+              "1.LevelControl.MaxLevel": 254,
+              "1.LevelControl.MinFrequency": 0,
+              "1.LevelControl.MinLevel": 1,
+              "1.LevelControl.OffTransitionTime": null,
+              "1.LevelControl.OnLevel": null,
+              "1.LevelControl.OnOffTransitionTime": 0,
+              "1.LevelControl.OnTransitionTime": null,
+              "1.LevelControl.Options": 0,
+              "1.LevelControl.RemainingTime": 0,
+              "1.LevelControl.StartUpCurrentLevel": null,
+              "1.OnOff.GlobalSceneControl": true,
+              "1.OnOff.OffWaitTime": 0,
+              "1.OnOff.OnOff": true,
+              "1.OnOff.OnTime": 0,
+              "1.OnOff.StartUpOnOff": null
+            }
+          },
+          {
+            "device_id": "kitchen_dishwasher_1",
+            "device_type": "dishwasher",
+            "attributes": {
+              "0.BasicInformation.ProductID": 117,
+              "0.BasicInformation.ProductName": "Dishwasher",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.DishwasherAlarm.Latch": 0,
+              "1.DishwasherAlarm.Mask": 0,
+              "1.DishwasherAlarm.State": 0,
+              "1.DishwasherAlarm.Supported": 63,
+              "1.DishwasherMode.CurrentMode": 0,
+              "1.DishwasherMode.SupportedModes": [
+                {
+                  "label": "Normal",
+                  "mode": 0,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "label": "Heavy Duty",
+                  "mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "label": "Light Wash",
+                  "mode": 2,
+                  "ModeTags": [
+                    16386
+                  ]
+                },
+                {
+                  "label": "Quick Wash",
+                  "mode": 3,
+                  "ModeTags": [
+                    1
+                  ]
+                },
+                {
+                  "label": "Low Energy",
+                  "mode": 4,
+                  "ModeTags": [
+                    4
+                  ]
+                },
+                {
+                  "label": "Silent",
+                  "mode": 5,
+                  "ModeTags": [
+                    2,
+                    3
+                  ]
+                }
+              ],
+              "1.OnOff.OnOff": false,
+              "1.OperationalState.CountdownTime": null,
+              "1.OperationalState.CurrentPhase": null,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 0,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Pre-wash",
+                "Main wash",
+                "Rinse",
+                "Dry",
+                "Complete"
+              ]
+            }
+          },
+          {
+            "device_id": "kitchen_freezer_1",
+            "device_type": "freezer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Freezer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [
+                "Freezer"
+              ],
+              "1.RTCCMode.CurrentMode": 0,
+              "1.RTCCMode.SupportedModes": [
+                {
+                  "Label": "Normal",
+                  "Mode": 0,
+                  "ModeTags": [
+                    0
+                  ]
+                },
+                {
+                  "Label": "Energy Save",
+                  "Mode": 4,
+                  "ModeTags": [
+                    4
+                  ]
+                },
+                {
+                  "Label": "Rapid Cool",
+                  "Mode": 16384,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "Label": "Rapid Freeze",
+                  "Mode": 16385,
+                  "ModeTags": [
+                    16385
+                  ]
+                }
+              ],
+              "1.TemperatureControl.MaxTemperature": -1500,
+              "1.TemperatureControl.MinTemperature": -2300,
+              "1.TemperatureControl.TemperatureSetpoint": -1500,
+              "1.TemperatureMeasurement.MaxMeasuredValue": 32766,
+              "1.TemperatureMeasurement.MeasuredValue": -1500,
+              "1.TemperatureMeasurement.MinMeasuredValue": -27315
+            }
+          },
+          {
+            "device_id": "kitchen_heat_pump_1",
+            "device_type": "heat_pump",
+            "attributes": {
+              "0.BasicInformation.ProductID": 777,
+              "0.BasicInformation.ProductName": "Heat Pump",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Heat Pump",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [
+                "Grid"
+              ],
+              "1.PowerSource.ActiveWiredFaults": [],
+              "1.PowerSource.ClusterRevision": 3,
+              "1.PowerSource.Description": "AC Grid Connection",
+              "1.PowerSource.EndpointList": [],
+              "1.PowerSource.FeatureMap": 1,
+              "1.PowerSource.Order": 0,
+              "1.PowerSource.Status": 2,
+              "1.PowerSource.WiredAssessedCurrent": null,
+              "1.PowerSource.WiredAssessedInputFrequency": null,
+              "1.PowerSource.WiredAssessedInputVoltage": 220000,
+              "1.PowerSource.WiredCurrentType": 0,
+              "1.PowerSource.WiredMaximumCurrent": 0,
+              "1.PowerSource.WiredNominalVoltage": 220000,
+              "1.PowerSource.WiredPresent": true,
+              "2.Descriptor.ClientList": [],
+              "2.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "2.Descriptor.PartsList": [],
+              "2.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "2.Descriptor.TagList": [
+                "ElectricalSensor"
+              ],
+              "2.ElectricalEnergyMeasurement.Accuracy": {
+                "MeasurementType": 0,
+                "Measured": true,
+                "MinMeasuredValue": 0,
+                "MaxMeasuredValue": 4611686018427387904,
+                "AccuracyRanges": [
+                  {
+                    "RangeMin": 0,
+                    "RangeMax": 4611686018427387904,
+                    "PercentMax": 500,
+                    "PercentMin": 100,
+                    "PercentTypical": 200,
+                    "FixedMax": null,
+                    "FixedMin": null,
+                    "FixedTypical": null
+                  }
+                ]
+              },
+              "2.ElectricalEnergyMeasurement.ClusterRevision": 1,
+              "2.ElectricalEnergyMeasurement.CumulativeEnergyImported": null,
+              "2.ElectricalEnergyMeasurement.FeatureMap": 13,
+              "2.ElectricalEnergyMeasurement.PeriodicEnergyImported": null,
+              "2.ElectricalPowerMeasurement.Accuracy": [
+                {
+                  "MeasurementType": 1,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 2,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 5,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 7,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 8,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 9,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 10,
+                  "Measured": true,
+                  "MinMeasuredValue": -4611686018427387904,
+                  "MaxMeasuredValue": 4611686018427387904,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -4611686018427387904,
+                      "RangeMax": 4611686018427387904,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 11,
+                  "Measured": true,
+                  "MinMeasuredValue": 0,
+                  "MaxMeasuredValue": 1000000,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": 0,
+                      "RangeMax": 1000000,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                },
+                {
+                  "MeasurementType": 12,
+                  "Measured": true,
+                  "MinMeasuredValue": -10000,
+                  "MaxMeasuredValue": 10000,
+                  "AccuracyRanges": [
+                    {
+                      "RangeMin": -10000,
+                      "RangeMax": 10000,
+                      "PercentMax": 500,
+                      "PercentMin": 100,
+                      "PercentTypical": 200,
+                      "FixedMax": null,
+                      "FixedMin": null,
+                      "FixedTypical": null
+                    }
+                  ]
+                }
+              ],
+              "2.ElectricalPowerMeasurement.ActiveCurrent": 15000,
+              "2.ElectricalPowerMeasurement.ActivePower": 3450000,
+              "2.ElectricalPowerMeasurement.ApparentPower": 3631580,
+              "2.ElectricalPowerMeasurement.ClusterRevision": 1,
+              "2.ElectricalPowerMeasurement.FeatureMap": 2,
+              "2.ElectricalPowerMeasurement.Frequency": 50000,
+              "2.ElectricalPowerMeasurement.NumberOfMeasurementTypes": 9,
+              "2.ElectricalPowerMeasurement.PowerFactor": 9500,
+              "2.ElectricalPowerMeasurement.PowerMode": 2,
+              "2.ElectricalPowerMeasurement.RMSCurrent": 15000,
+              "2.ElectricalPowerMeasurement.RMSPower": 3450000,
+              "2.ElectricalPowerMeasurement.RMSVoltage": 230000,
+              "2.ElectricalPowerMeasurement.Voltage": 230000,
+              "2.PowerTopology.ClusterRevision": 1,
+              "2.PowerTopology.FeatureMap": 1,
+              "3.Descriptor.ClientList": [],
+              "3.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "3.Descriptor.PartsList": [],
+              "3.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "3.Descriptor.TagList": [
+                "EnergyManagement"
+              ],
+              "3.DeviceEnergyManagement.AbsMaxPower": 8000000,
+              "3.DeviceEnergyManagement.AbsMinPower": 1000000,
+              "3.DeviceEnergyManagement.ESACanGenerate": false,
+              "3.DeviceEnergyManagement.ESAState": 0,
+              "3.DeviceEnergyManagement.ESAType": 1,
+              "3.DeviceEnergyManagement.PowerAdjustmentCapability": {
+                "power_adjust_capability": [],
+                "cause": 0
+              },
+              "4.Descriptor.ClientList": [],
+              "4.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "4.Descriptor.PartsList": [],
+              "4.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "4.Descriptor.TagList": [
+                "RoomThermostat"
+              ],
+              "4.Thermostat.ControlSequenceOfOperation": 4,
+              "4.Thermostat.LocalTemperature": 2945,
+              "4.Thermostat.OccupiedCoolingSetpoint": 2000,
+              "4.Thermostat.OccupiedHeatingSetpoint": 2800,
+              "4.Thermostat.SystemMode": 4
+            }
+          },
+          {
+            "device_id": "kitchen_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "kitchen_refrigerator_1",
+            "device_type": "refrigerator",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Refrigerator",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [
+                "Refrigerator"
+              ],
+              "1.RTCCMode.CurrentMode": 0,
+              "1.RTCCMode.SupportedModes": [
+                {
+                  "Label": "Normal",
+                  "Mode": 0,
+                  "ModeTags": [
+                    0
+                  ]
+                },
+                {
+                  "Label": "Energy Save",
+                  "Mode": 4,
+                  "ModeTags": [
+                    4
+                  ]
+                },
+                {
+                  "Label": "Rapid Cool",
+                  "Mode": 16384,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "Label": "Rapid Freeze",
+                  "Mode": 16385,
+                  "ModeTags": [
+                    16385
+                  ]
+                }
+              ],
+              "1.TemperatureControl.MaxTemperature": 700,
+              "1.TemperatureControl.MinTemperature": 100,
+              "1.TemperatureControl.TemperatureSetpoint": 400,
+              "1.TemperatureMeasurement.MaxMeasuredValue": 32766,
+              "1.TemperatureMeasurement.MeasuredValue": 700,
+              "1.TemperatureMeasurement.MinMeasuredValue": -27315
+            }
+          }
+        ],
+        "state": {
+          "humidity": 4781.0,
+          "illuminance": 870.143937007874,
+          "pm10": 68.91,
+          "temperature": 2945.0
+        }
+      },
+      "living_room": {
+        "devices": [
+          {
+            "device_id": "living_room_air_conditioner_1",
+            "device_type": "air_conditioner",
+            "attributes": {
+              "0.BasicInformation.ProductID": 1,
+              "0.BasicInformation.ProductName": "Air Conditioner",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 0,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 0,
+              "1.FanControl.PercentSetting": 0,
+              "1.OnOff.OnOff": true,
+              "1.Thermostat.ControlSequenceOfOperation": 4,
+              "1.Thermostat.LocalTemperature": 2988,
+              "1.Thermostat.OccupiedCoolingSetpoint": 2000,
+              "1.Thermostat.OccupiedHeatingSetpoint": 2800,
+              "1.Thermostat.SystemMode": 3
+            }
+          },
+          {
+            "device_id": "living_room_dehumidifier_1",
+            "device_type": "dehumidifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 7,
+              "0.BasicInformation.ProductName": "Dehumidifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 3,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 85,
+              "1.FanControl.PercentSetting": 85,
+              "1.OnOff.OnOff": true,
+              "2.RelativeHumidityMeasurement.MaxMeasuredValue": 9500,
+              "2.RelativeHumidityMeasurement.MeasuredValue": 4630,
+              "2.RelativeHumidityMeasurement.MinMeasuredValue": 1000,
+              "2.RelativeHumidityMeasurement.Tolerance": null
+            }
+          },
+          {
+            "device_id": "living_room_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "living_room_tv_1",
+            "device_type": "tv",
+            "attributes": {
+              "0.BasicInformation.ProductID": 5,
+              "0.BasicInformation.ProductName": "TV",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Channel.ChannelList": [
+                {
+                  "MajorNumber": 1,
+                  "MinorNumber": 0,
+                  "Name": "KBS1",
+                  "CallSign": "KBS1",
+                  "AffiliateCallSign": "KBS1",
+                  "Identifier": "kbs1",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 2,
+                  "MinorNumber": 0,
+                  "Name": "KBS2",
+                  "CallSign": "KBS2",
+                  "AffiliateCallSign": "KBS2",
+                  "Identifier": "kbs2",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 3,
+                  "MinorNumber": 0,
+                  "Name": "MBC",
+                  "CallSign": "MBC",
+                  "AffiliateCallSign": "MBC",
+                  "Identifier": "mbc",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 4,
+                  "MinorNumber": 0,
+                  "Name": "SBS",
+                  "CallSign": "SBS",
+                  "AffiliateCallSign": "SBS",
+                  "Identifier": "sbs",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 5,
+                  "MinorNumber": 0,
+                  "Name": "EBS",
+                  "CallSign": "EBS",
+                  "AffiliateCallSign": "EBS",
+                  "Identifier": "ebs",
+                  "Type": 2
+                }
+              ],
+              "1.Channel.CurrentChannel": {
+                "MajorNumber": 2,
+                "MinorNumber": 0,
+                "Name": "KBS2",
+                "CallSign": "KBS2",
+                "AffiliateCallSign": "KBS2",
+                "Identifier": "kbs2",
+                "Type": 2
+              },
+              "1.Channel.Lineup": {
+                "OperatorName": "Comcast",
+                "LineupName": "Comcast King County",
+                "PostalCode": "98052",
+                "LineupInfoType": 0
+              },
+              "1.KeypadInput.ClusterRevision": 1,
+              "1.KeypadInput.FeatureMap": 7,
+              "1.LevelControl.CurrentFrequency": 0,
+              "1.LevelControl.CurrentLevel": null,
+              "1.LevelControl.DefaultMoveRate": null,
+              "1.LevelControl.MaxFrequency": 0,
+              "1.LevelControl.MaxLevel": 254,
+              "1.LevelControl.MinFrequency": 0,
+              "1.LevelControl.MinLevel": 1,
+              "1.LevelControl.OffTransitionTime": null,
+              "1.LevelControl.OnLevel": null,
+              "1.LevelControl.OnOffTransitionTime": 0,
+              "1.LevelControl.OnTransitionTime": null,
+              "1.LevelControl.Options": 0,
+              "1.LevelControl.RemainingTime": 0,
+              "1.LevelControl.StartUpCurrentLevel": null,
+              "1.MediaPlayback.CurrentState": 2,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "living_room_window_covering_controller_1",
+            "device_type": "window_covering_controller",
+            "attributes": {
+              "0.BasicInformation.ProductID": 10,
+              "0.BasicInformation.ProductName": "Window Covering Controller",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.WindowCovering.ConfigStatus": 1,
+              "1.WindowCovering.CurrentPositionLiftPercent100ths": 10000,
+              "1.WindowCovering.EndProductType": 0,
+              "1.WindowCovering.Mode": 1,
+              "1.WindowCovering.NumberOfActuationsLift": 20,
+              "1.WindowCovering.OperationalStatus": 0,
+              "1.WindowCovering.SafetyStatus": 0,
+              "1.WindowCovering.TargetPositionLiftPercent100ths": 10000,
+              "1.WindowCovering.Type": 0
+            }
+          }
+        ],
+        "state": {
+          "humidity": 4630.777079769077,
+          "illuminance": 373.78,
+          "pm10": 36.5,
+          "temperature": 2988.0
+        }
+      },
+      "utility_room": {
+        "devices": [
+          {
+            "device_id": "utility_room_air_conditioner_1",
+            "device_type": "air_conditioner",
+            "attributes": {
+              "0.BasicInformation.ProductID": 1,
+              "0.BasicInformation.ProductName": "Air Conditioner",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 0,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 0,
+              "1.FanControl.PercentSetting": 0,
+              "1.OnOff.OnOff": true,
+              "1.Thermostat.ControlSequenceOfOperation": 4,
+              "1.Thermostat.LocalTemperature": 2855,
+              "1.Thermostat.OccupiedCoolingSetpoint": 3100,
+              "1.Thermostat.OccupiedHeatingSetpoint": 2800,
+              "1.Thermostat.SystemMode": 3
+            }
+          },
+          {
+            "device_id": "utility_room_laundry_dryer_1",
+            "device_type": "laundry_dryer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 128,
+              "0.BasicInformation.ProductName": "Laundry Dryer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Generic Vendor",
+              "1.LaundryDryerControls.SelectedDrynessLevel": 1,
+              "1.LaundryDryerControls.SupportedDrynessLevels": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "1.OnOff.OnOff": true,
+              "1.OperationalState.CountdownTime": 2660,
+              "1.OperationalState.CurrentPhase": 0,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 1,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Heating",
+                "Drying",
+                "CoolDown",
+                "Complete"
+              ]
+            }
+          },
+          {
+            "device_id": "utility_room_laundry_washer_1",
+            "device_type": "laundry_washer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 81,
+              "0.BasicInformation.ProductName": "Laundry Washer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Samsung Electronics",
+              "1.LaundryWasherControls.NumberOfRinses": 1,
+              "1.LaundryWasherControls.SpinSpeedCurrent": 1,
+              "1.LaundryWasherControls.SpinSpeeds": [
+                0,
+                1
+              ],
+              "1.LaundryWasherControls.SupportedRinses": [
+                1,
+                2
+              ],
+              "1.LaundryWasherMode.CurrentMode": 1,
+              "1.LaundryWasherMode.SupportedModes": [
+                {
+                  "label": "Normal",
+                  "mode": 0,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "label": "Delicate",
+                  "mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "label": "Heavy",
+                  "mode": 2,
+                  "ModeTags": [
+                    16386
+                  ]
+                },
+                {
+                  "label": "Whites",
+                  "mode": 3,
+                  "ModeTags": [
+                    16387
+                  ]
+                },
+                {
+                  "label": "Quick Normal",
+                  "mode": 4,
+                  "ModeTags": [
+                    1,
+                    16384
+                  ]
+                },
+                {
+                  "label": "Heavy Whites",
+                  "mode": 5,
+                  "ModeTags": [
+                    16386,
+                    16387
+                  ]
+                }
+              ],
+              "1.OnOff.OnOff": true,
+              "1.OperationalState.CountdownTime": null,
+              "1.OperationalState.CurrentPhase": null,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 0,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Pre-wash",
+                "Main wash",
+                "Rinse",
+                "Spin",
+                "Complete"
+              ],
+              "1.TemperatureControl.MaxTemperature": 9500,
+              "1.TemperatureControl.MinTemperature": 500,
+              "1.TemperatureControl.TemperatureSetpoint": 2000
+            }
+          },
+          {
+            "device_id": "utility_room_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          }
+        ],
+        "state": {
+          "humidity": 3786.0,
+          "illuminance": 736.06,
+          "pm10": 45.3,
+          "temperature": 2855.0
+        }
+      }
+    }
+  }
+}

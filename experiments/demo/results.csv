@@ -1,3 +1,13 @@
 episode_id,query_type,case,seed,agent,success,steps,final_answer,graph_hits,graph_misses,facts_written,error
 qt1_feasible_seed1,qt1,feasible,1,baseline,True,10,"The utility room is currently brighter than the bathroom, with an illuminance of 681.81 lux compared to the bathroom's 1",0,0,0,
 qt1_feasible_seed1,qt1,feasible,1,tkg,True,3,"The utility room is nicely lit with an illuminance of 681.81 lux, while the bathroom is a bit dim with an illuminance of",3,0,8,
+qt1_feasible_seed10,qt1,feasible,10,baseline,True,2,The current humidity in the office is 52.61%.,0,0,0,
+qt1_feasible_seed10,qt1,feasible,10,tkg,True,1,52.62%,1,0,0,
+qt1_feasible_seed11,qt1,feasible,11,baseline,True,5,"The blinds 1 in the utility room is showing a safety alert status of 0, which means no safety alert. The brightness in t",0,0,0,
+qt1_feasible_seed11,qt1,feasible,11,tkg,True,5,There are no safety alerts on blinds 1 in the utility room. The current brightness in the living room is 1102.55 lux.,5,0,45,
+qt1_feasible_seed12,qt1,feasible,12,baseline,True,6,"The refrigerator temperature is 7.00°C and the air quality in the kitchen is: temperature=24.90°C, humidity=55.38%, illu",0,0,0,
+qt1_feasible_seed12,qt1,feasible,12,tkg,True,3,"The kitchen is currently at a temperature of 24.90°C, the air quality is 56.16 µg/m³, and the refrigerator's temperature",3,0,21,
+qt1_feasible_seed13,qt1,feasible,13,baseline,True,6,The slow fade has finished adjusting.,0,0,0,
+qt1_feasible_seed13,qt1,feasible,13,tkg,True,4,The fade has finished adjusting.,4,0,56,
+qt4-1_feasible_seed1,qt4-1,feasible,1,baseline,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 1 attempts: Connection error.
+qt4-1_feasible_seed1,qt4-1,feasible,1,tkg,False,0,,0,0,0,LLM call failed at step 1: Groq call failed after 1 attempts: Connection error.

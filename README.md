@@ -74,6 +74,8 @@ simuhome-tkg-agent/
 │   │   ├── tkg_agent.py         # TKG-enhanced agent
 │   │   ├── groq_provider.py     # Groq LLM provider
 │   │   └── kaggle_provider.py   # Self-hosted Kaggle LLM provider
+    ├── data/
+    │    └── benchmark/          #bench mark episodes(600) from simuhome (feasible+infeasible)
 │   ├── graph/
 │   │   └── neo4j_client.py      # Neo4j connection + temporal write/read
 │   ├── ingestor/

@@ -14,11 +14,12 @@ from __future__ import annotations
 import csv
 import json
 import os
+import sys
 import time
 import traceback
 from dataclasses import dataclass, asdict, fields
 from pathlib import Path
-
+import sys
 import requests
 from dotenv import load_dotenv
 from rich.console import Console
@@ -106,7 +107,10 @@ def _reset_simulator(episode: dict) -> bool:
         console.print(f"[red]  Simulator reset error: {e}[/red]")
         return False
 
-
+def stop_if_rate_limit(e: Exception) -> bool:
+    err = str(e)
+    is_rate = "429" in err or "rate" in err.lower()
+    return is_rate
 def _run_baseline(episode: dict, max_steps: int) -> EpisodeResult:
     from tkg_agent.agent.base_agent import BaseReActAgent
     from tkg_agent.agent.groq_provider import GroqProvider
@@ -130,6 +134,10 @@ def _run_baseline(episode: dict, max_steps: int) -> EpisodeResult:
             graph_hits=0, graph_misses=0, facts_written=0, error="",
         )
     except Exception as e:
+        if stop_if_rate_limit(e):
+            console.print(f"[red]  Baseline hit rate limit: {e}[/red]")
+            sys.exit(1)
+        console.print(f"[red]  Baseline error: {e}[/red]")
         return EpisodeResult(
             episode_id=ep_id, query_type=meta["query_type"], case=meta["case"],
             seed=meta["seed"], agent="baseline", success=False, steps=0,
@@ -164,6 +172,13 @@ def _run_tkg(episode: dict, db, max_steps: int) -> EpisodeResult:
             facts_written=m["facts_written"], error="",
         )
     except Exception as e:
+        
+        if stop_if_rate_limit(e):
+            console.print(f"[red]  Rate limit hit: {e}[/red]")
+            console.print(f"[red]  Stopping further runs to avoid more rate limits.[/red]")
+            sys.exit(1)
+            print(f"[red]  TKG Agent error: {e}[/red]")
+            
         return EpisodeResult(
             episode_id=ep_id, query_type=meta["query_type"], case=meta["case"],
             seed=meta["seed"], agent="tkg", success=False, steps=0,

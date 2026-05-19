@@ -1,0 +1,1290 @@
+{
+  "meta": {
+    "seed": 28,
+    "query_type": "qt4-1",
+    "case": "infeasible",
+    "num_rooms": 5,
+    "num_devices": 29,
+    "conflict_type": "absolute_time_mismatch_nonop_multi"
+  },
+  "query": "At 11:12 AM, that is 12 minutes from now, turn on air purifier 1 in the bathroom and set the fan to fifty percent so it clears the shower steam while I finish up in the utility room.",
+  "user_location": "utility_room",
+  "temporal_conflict": {
+    "type": "absolute_time_mismatch_nonop_multi",
+    "expected_at": 12,
+    "conflict_at": 25,
+    "base_time": "2025-08-23 10:47:08",
+    "expected_time": "10:59:08",
+    "conflict_time": "11:12:08"
+  },
+  "eval": {
+    "required_actions": [],
+    "goals": [
+      {
+        "when": {
+          "reference_tick": 0,
+          "reference_minutes": 0,
+          "relation": "after",
+          "offset_ticks": 7200,
+          "offset_minutes": 12,
+          "at_tick": 7200,
+          "at_minutes": 12,
+          "tolerance_ticks": 300
+        },
+        "anchor": {},
+        "targets": [
+          {
+            "room_id": "bathroom",
+            "device_id": "bathroom_air_purifier_1",
+            "device_type": "air_purifier",
+            "asserts": [
+              {
+                "attribute": "1.OnOff.OnOff",
+                "value": true,
+                "value_type": "bool",
+                "description": "power on"
+              },
+              {
+                "attribute": "1.FanControl.PercentSetting",
+                "value": 50,
+                "value_type": "percent",
+                "description": "fan 50%"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "initial_home_config": {
+    "tick_interval": 0.1,
+    "base_time": "2025-08-23 10:47:08",
+    "rooms": {
+      "bathroom": {
+        "devices": [
+          {
+            "device_id": "bathroom_air_purifier_1",
+            "device_type": "air_purifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Air Purifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [],
+              "1.FanControl.FanMode": 0,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 0,
+              "1.FanControl.PercentSetting": 0,
+              "1.Identify.ClusterRevision": 5,
+              "1.Identify.FeatureMap": 0,
+              "1.Identify.IdentifyTime": 0,
+              "1.Identify.IdentifyType": 2,
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "bathroom_dimmable_light_1",
+            "device_type": "dimmable_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 3,
+              "0.BasicInformation.ProductName": "Dimmable Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.LevelControl.CurrentFrequency": 0,
+              "1.LevelControl.CurrentLevel": 231,
+              "1.LevelControl.DefaultMoveRate": null,
+              "1.LevelControl.MaxFrequency": 0,
+              "1.LevelControl.MaxLevel": 254,
+              "1.LevelControl.MinFrequency": 0,
+              "1.LevelControl.MinLevel": 1,
+              "1.LevelControl.OffTransitionTime": null,
+              "1.LevelControl.OnLevel": null,
+              "1.LevelControl.OnOffTransitionTime": 0,
+              "1.LevelControl.OnTransitionTime": null,
+              "1.LevelControl.Options": 0,
+              "1.LevelControl.RemainingTime": 0,
+              "1.LevelControl.StartUpCurrentLevel": null,
+              "1.OnOff.GlobalSceneControl": true,
+              "1.OnOff.OffWaitTime": 0,
+              "1.OnOff.OnOff": true,
+              "1.OnOff.OnTime": 0,
+              "1.OnOff.StartUpOnOff": null
+            }
+          },
+          {
+            "device_id": "bathroom_laundry_dryer_1",
+            "device_type": "laundry_dryer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 128,
+              "0.BasicInformation.ProductName": "Laundry Dryer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Generic Vendor",
+              "1.LaundryDryerControls.SelectedDrynessLevel": 0,
+              "1.LaundryDryerControls.SupportedDrynessLevels": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "1.OnOff.OnOff": true,
+              "1.OperationalState.CountdownTime": null,
+              "1.OperationalState.CurrentPhase": null,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 0,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Heating",
+                "Drying",
+                "CoolDown",
+                "Complete"
+              ]
+            }
+          },
+          {
+            "device_id": "bathroom_laundry_washer_1",
+            "device_type": "laundry_washer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 81,
+              "0.BasicInformation.ProductName": "Laundry Washer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Samsung Electronics",
+              "1.LaundryWasherControls.NumberOfRinses": 1,
+              "1.LaundryWasherControls.SpinSpeedCurrent": 1,
+              "1.LaundryWasherControls.SpinSpeeds": [
+                1,
+                2,
+                3
+              ],
+              "1.LaundryWasherControls.SupportedRinses": [
+                1,
+                2,
+                3
+              ],
+              "1.LaundryWasherMode.CurrentMode": 2,
+              "1.LaundryWasherMode.SupportedModes": [
+                {
+                  "label": "Normal",
+                  "mode": 0,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "label": "Delicate",
+                  "mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "label": "Heavy",
+                  "mode": 2,
+                  "ModeTags": [
+                    16386
+                  ]
+                },
+                {
+                  "label": "Whites",
+                  "mode": 3,
+                  "ModeTags": [
+                    16387
+                  ]
+                },
+                {
+                  "label": "Quick Normal",
+                  "mode": 4,
+                  "ModeTags": [
+                    1,
+                    16384
+                  ]
+                },
+                {
+                  "label": "Heavy Whites",
+                  "mode": 5,
+                  "ModeTags": [
+                    16386,
+                    16387
+                  ]
+                }
+              ],
+              "1.OnOff.OnOff": true,
+              "1.OperationalState.CountdownTime": null,
+              "1.OperationalState.CurrentPhase": null,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 0,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Pre-wash",
+                "Main wash",
+                "Rinse",
+                "Spin",
+                "Complete"
+              ],
+              "1.TemperatureControl.MaxTemperature": 9500,
+              "1.TemperatureControl.MinTemperature": 500,
+              "1.TemperatureControl.TemperatureSetpoint": 2000
+            }
+          },
+          {
+            "device_id": "bathroom_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          }
+        ],
+        "state": {
+          "humidity": 3850.0,
+          "illuminance": 1393.0744094488189,
+          "pm10": 83.14,
+          "temperature": 3037.0
+        }
+      },
+      "bedroom": {
+        "devices": [
+          {
+            "device_id": "bedroom_air_purifier_1",
+            "device_type": "air_purifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Air Purifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [],
+              "1.FanControl.FanMode": 2,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 51,
+              "1.FanControl.PercentSetting": 51,
+              "1.Identify.ClusterRevision": 5,
+              "1.Identify.FeatureMap": 0,
+              "1.Identify.IdentifyTime": 0,
+              "1.Identify.IdentifyType": 2,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "bedroom_dehumidifier_1",
+            "device_type": "dehumidifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 7,
+              "0.BasicInformation.ProductName": "Dehumidifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 2,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 53,
+              "1.FanControl.PercentSetting": 53,
+              "1.OnOff.OnOff": true,
+              "2.RelativeHumidityMeasurement.MaxMeasuredValue": 9500,
+              "2.RelativeHumidityMeasurement.MeasuredValue": 3913,
+              "2.RelativeHumidityMeasurement.MinMeasuredValue": 1000,
+              "2.RelativeHumidityMeasurement.Tolerance": null
+            }
+          },
+          {
+            "device_id": "bedroom_dimmable_light_1",
+            "device_type": "dimmable_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 3,
+              "0.BasicInformation.ProductName": "Dimmable Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.LevelControl.CurrentFrequency": 0,
+              "1.LevelControl.CurrentLevel": 171,
+              "1.LevelControl.DefaultMoveRate": null,
+              "1.LevelControl.MaxFrequency": 0,
+              "1.LevelControl.MaxLevel": 254,
+              "1.LevelControl.MinFrequency": 0,
+              "1.LevelControl.MinLevel": 1,
+              "1.LevelControl.OffTransitionTime": null,
+              "1.LevelControl.OnLevel": null,
+              "1.LevelControl.OnOffTransitionTime": 0,
+              "1.LevelControl.OnTransitionTime": null,
+              "1.LevelControl.Options": 0,
+              "1.LevelControl.RemainingTime": 0,
+              "1.LevelControl.StartUpCurrentLevel": null,
+              "1.OnOff.GlobalSceneControl": true,
+              "1.OnOff.OffWaitTime": 0,
+              "1.OnOff.OnOff": true,
+              "1.OnOff.OnTime": 0,
+              "1.OnOff.StartUpOnOff": null
+            }
+          },
+          {
+            "device_id": "bedroom_fan_1",
+            "device_type": "fan",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Fan",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 3,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 99,
+              "1.FanControl.PercentSetting": 99,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "bedroom_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "bedroom_tv_1",
+            "device_type": "tv",
+            "attributes": {
+              "0.BasicInformation.ProductID": 5,
+              "0.BasicInformation.ProductName": "TV",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Channel.ChannelList": [
+                {
+                  "MajorNumber": 1,
+                  "MinorNumber": 0,
+                  "Name": "KBS1",
+                  "CallSign": "KBS1",
+                  "AffiliateCallSign": "KBS1",
+                  "Identifier": "kbs1",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 2,
+                  "MinorNumber": 0,
+                  "Name": "KBS2",
+                  "CallSign": "KBS2",
+                  "AffiliateCallSign": "KBS2",
+                  "Identifier": "kbs2",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 3,
+                  "MinorNumber": 0,
+                  "Name": "MBC",
+                  "CallSign": "MBC",
+                  "AffiliateCallSign": "MBC",
+                  "Identifier": "mbc",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 4,
+                  "MinorNumber": 0,
+                  "Name": "SBS",
+                  "CallSign": "SBS",
+                  "AffiliateCallSign": "SBS",
+                  "Identifier": "sbs",
+                  "Type": 2
+                },
+                {
+                  "MajorNumber": 5,
+                  "MinorNumber": 0,
+                  "Name": "EBS",
+                  "CallSign": "EBS",
+                  "AffiliateCallSign": "EBS",
+                  "Identifier": "ebs",
+                  "Type": 2
+                }
+              ],
+              "1.Channel.CurrentChannel": {
+                "MajorNumber": 2,
+                "MinorNumber": 0,
+                "Name": "KBS2",
+                "CallSign": "KBS2",
+                "AffiliateCallSign": "KBS2",
+                "Identifier": "kbs2",
+                "Type": 2
+              },
+              "1.Channel.Lineup": {
+                "OperatorName": "Comcast",
+                "LineupName": "Comcast King County",
+                "PostalCode": "98052",
+                "LineupInfoType": 0
+              },
+              "1.KeypadInput.ClusterRevision": 1,
+              "1.KeypadInput.FeatureMap": 7,
+              "1.LevelControl.CurrentFrequency": 0,
+              "1.LevelControl.CurrentLevel": null,
+              "1.LevelControl.DefaultMoveRate": null,
+              "1.LevelControl.MaxFrequency": 0,
+              "1.LevelControl.MaxLevel": 254,
+              "1.LevelControl.MinFrequency": 0,
+              "1.LevelControl.MinLevel": 1,
+              "1.LevelControl.OffTransitionTime": null,
+              "1.LevelControl.OnLevel": null,
+              "1.LevelControl.OnOffTransitionTime": 0,
+              "1.LevelControl.OnTransitionTime": null,
+              "1.LevelControl.Options": 0,
+              "1.LevelControl.RemainingTime": 0,
+              "1.LevelControl.StartUpCurrentLevel": null,
+              "1.MediaPlayback.CurrentState": 2,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "bedroom_window_covering_controller_1",
+            "device_type": "window_covering_controller",
+            "attributes": {
+              "0.BasicInformation.ProductID": 10,
+              "0.BasicInformation.ProductName": "Window Covering Controller",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.WindowCovering.ConfigStatus": 1,
+              "1.WindowCovering.CurrentPositionLiftPercent100ths": 0,
+              "1.WindowCovering.EndProductType": 0,
+              "1.WindowCovering.Mode": 1,
+              "1.WindowCovering.NumberOfActuationsLift": 0,
+              "1.WindowCovering.OperationalStatus": 0,
+              "1.WindowCovering.SafetyStatus": 0,
+              "1.WindowCovering.TargetPositionLiftPercent100ths": 0,
+              "1.WindowCovering.Type": 0
+            }
+          }
+        ],
+        "state": {
+          "humidity": 3913.161873013381,
+          "illuminance": 1485.6241732283465,
+          "pm10": 41.80451121315334,
+          "temperature": 2970.2956645635822
+        }
+      },
+      "kitchen": {
+        "devices": [
+          {
+            "device_id": "kitchen_air_purifier_1",
+            "device_type": "air_purifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Air Purifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [],
+              "1.FanControl.FanMode": 3,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 86,
+              "1.FanControl.PercentSetting": 86,
+              "1.Identify.ClusterRevision": 5,
+              "1.Identify.FeatureMap": 0,
+              "1.Identify.IdentifyTime": 0,
+              "1.Identify.IdentifyType": 2,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "kitchen_dishwasher_1",
+            "device_type": "dishwasher",
+            "attributes": {
+              "0.BasicInformation.ProductID": 117,
+              "0.BasicInformation.ProductName": "Dishwasher",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.DishwasherAlarm.Latch": 0,
+              "1.DishwasherAlarm.Mask": 0,
+              "1.DishwasherAlarm.State": 0,
+              "1.DishwasherAlarm.Supported": 63,
+              "1.DishwasherMode.CurrentMode": 0,
+              "1.DishwasherMode.SupportedModes": [
+                {
+                  "label": "Normal",
+                  "mode": 0,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "label": "Heavy Duty",
+                  "mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "label": "Light Wash",
+                  "mode": 2,
+                  "ModeTags": [
+                    16386
+                  ]
+                },
+                {
+                  "label": "Quick Wash",
+                  "mode": 3,
+                  "ModeTags": [
+                    1
+                  ]
+                },
+                {
+                  "label": "Low Energy",
+                  "mode": 4,
+                  "ModeTags": [
+                    4
+                  ]
+                },
+                {
+                  "label": "Silent",
+                  "mode": 5,
+                  "ModeTags": [
+                    2,
+                    3
+                  ]
+                }
+              ],
+              "1.OnOff.OnOff": true,
+              "1.OperationalState.CountdownTime": null,
+              "1.OperationalState.CurrentPhase": null,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 0,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Pre-wash",
+                "Main wash",
+                "Rinse",
+                "Dry",
+                "Complete"
+              ]
+            }
+          },
+          {
+            "device_id": "kitchen_freezer_1",
+            "device_type": "freezer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Freezer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [
+                "Freezer"
+              ],
+              "1.RTCCMode.CurrentMode": 0,
+              "1.RTCCMode.SupportedModes": [
+                {
+                  "Label": "Normal",
+                  "Mode": 0,
+                  "ModeTags": [
+                    0
+                  ]
+                },
+                {
+                  "Label": "Energy Save",
+                  "Mode": 4,
+                  "ModeTags": [
+                    4
+                  ]
+                },
+                {
+                  "Label": "Rapid Cool",
+                  "Mode": 16384,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "Label": "Rapid Freeze",
+                  "Mode": 16385,
+                  "ModeTags": [
+                    16385
+                  ]
+                }
+              ],
+              "1.TemperatureControl.MaxTemperature": -1500,
+              "1.TemperatureControl.MinTemperature": -2300,
+              "1.TemperatureControl.TemperatureSetpoint": -2100,
+              "1.TemperatureMeasurement.MaxMeasuredValue": 32766,
+              "1.TemperatureMeasurement.MeasuredValue": -1500,
+              "1.TemperatureMeasurement.MinMeasuredValue": -27315
+            }
+          },
+          {
+            "device_id": "kitchen_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "kitchen_refrigerator_1",
+            "device_type": "refrigerator",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Refrigerator",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [
+                "Refrigerator"
+              ],
+              "1.RTCCMode.CurrentMode": 0,
+              "1.RTCCMode.SupportedModes": [
+                {
+                  "Label": "Normal",
+                  "Mode": 0,
+                  "ModeTags": [
+                    0
+                  ]
+                },
+                {
+                  "Label": "Energy Save",
+                  "Mode": 4,
+                  "ModeTags": [
+                    4
+                  ]
+                },
+                {
+                  "Label": "Rapid Cool",
+                  "Mode": 16384,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "Label": "Rapid Freeze",
+                  "Mode": 16385,
+                  "ModeTags": [
+                    16385
+                  ]
+                }
+              ],
+              "1.TemperatureControl.MaxTemperature": 700,
+              "1.TemperatureControl.MinTemperature": 100,
+              "1.TemperatureControl.TemperatureSetpoint": 300,
+              "1.TemperatureMeasurement.MaxMeasuredValue": 32766,
+              "1.TemperatureMeasurement.MeasuredValue": 700,
+              "1.TemperatureMeasurement.MinMeasuredValue": -27315
+            }
+          },
+          {
+            "device_id": "kitchen_window_covering_controller_1",
+            "device_type": "window_covering_controller",
+            "attributes": {
+              "0.BasicInformation.ProductID": 10,
+              "0.BasicInformation.ProductName": "Window Covering Controller",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.WindowCovering.ConfigStatus": 1,
+              "1.WindowCovering.CurrentPositionLiftPercent100ths": 0,
+              "1.WindowCovering.EndProductType": 0,
+              "1.WindowCovering.Mode": 1,
+              "1.WindowCovering.NumberOfActuationsLift": 0,
+              "1.WindowCovering.OperationalStatus": 0,
+              "1.WindowCovering.SafetyStatus": 0,
+              "1.WindowCovering.TargetPositionLiftPercent100ths": 0,
+              "1.WindowCovering.Type": 0
+            }
+          }
+        ],
+        "state": {
+          "humidity": 3951.0,
+          "illuminance": 1354.89,
+          "pm10": 27.33963109805538,
+          "temperature": 2946.0
+        }
+      },
+      "living_room": {
+        "devices": [
+          {
+            "device_id": "living_room_dehumidifier_1",
+            "device_type": "dehumidifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 7,
+              "0.BasicInformation.ProductName": "Dehumidifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 1,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 30,
+              "1.FanControl.PercentSetting": 30,
+              "1.OnOff.OnOff": true,
+              "2.RelativeHumidityMeasurement.MaxMeasuredValue": 9500,
+              "2.RelativeHumidityMeasurement.MeasuredValue": 4101,
+              "2.RelativeHumidityMeasurement.MinMeasuredValue": 1000,
+              "2.RelativeHumidityMeasurement.Tolerance": null
+            }
+          },
+          {
+            "device_id": "living_room_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "living_room_rvc_1",
+            "device_type": "rvc",
+            "attributes": {
+              "0.BasicInformation.ProductID": 3,
+              "0.BasicInformation.ProductName": "RVC",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.RVCCleanMode.ClusterRevision": 3,
+              "1.RVCCleanMode.CurrentMode": 1,
+              "1.RVCCleanMode.FeatureMap": 0,
+              "1.RVCCleanMode.SupportedModes": [
+                {
+                  "Label": "Vacuum",
+                  "Mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "Label": "Deep Clean",
+                  "Mode": 2,
+                  "ModeTags": [
+                    16384,
+                    16385
+                  ]
+                },
+                {
+                  "Label": "Mop",
+                  "Mode": 3,
+                  "ModeTags": [
+                    16386
+                  ]
+                }
+              ],
+              "1.RVCOperationalState.ClusterRevision": 3,
+              "1.RVCOperationalState.CountdownTime": null,
+              "1.RVCOperationalState.CurrentPhase": null,
+              "1.RVCOperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.RVCOperationalState.OperationalState": 0,
+              "1.RVCOperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                },
+                {
+                  "operational_state_id": 64
+                },
+                {
+                  "operational_state_id": 65
+                },
+                {
+                  "operational_state_id": 66
+                }
+              ],
+              "1.RVCOperationalState.PhaseList": [
+                "Cleaning",
+                "SeekingCharger",
+                "Docked"
+              ],
+              "1.RVCRunMode.ClusterRevision": 3,
+              "1.RVCRunMode.CurrentMode": 1,
+              "1.RVCRunMode.FeatureMap": 0,
+              "1.RVCRunMode.SupportedModes": [
+                {
+                  "Label": "Idle",
+                  "Mode": 1,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "Label": "Vacuum",
+                  "Mode": 2,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "Label": "Mapping",
+                  "Mode": 3,
+                  "ModeTags": [
+                    16386
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "device_id": "living_room_rvc_2",
+            "device_type": "rvc",
+            "attributes": {
+              "0.BasicInformation.ProductID": 3,
+              "0.BasicInformation.ProductName": "RVC",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.RVCCleanMode.ClusterRevision": 3,
+              "1.RVCCleanMode.CurrentMode": 1,
+              "1.RVCCleanMode.FeatureMap": 0,
+              "1.RVCCleanMode.SupportedModes": [
+                {
+                  "Label": "Vacuum",
+                  "Mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "Label": "Deep Clean",
+                  "Mode": 2,
+                  "ModeTags": [
+                    16384,
+                    16385
+                  ]
+                },
+                {
+                  "Label": "Mop",
+                  "Mode": 3,
+                  "ModeTags": [
+                    16386
+                  ]
+                }
+              ],
+              "1.RVCOperationalState.ClusterRevision": 3,
+              "1.RVCOperationalState.CountdownTime": null,
+              "1.RVCOperationalState.CurrentPhase": null,
+              "1.RVCOperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.RVCOperationalState.OperationalState": 0,
+              "1.RVCOperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                },
+                {
+                  "operational_state_id": 64
+                },
+                {
+                  "operational_state_id": 65
+                },
+                {
+                  "operational_state_id": 66
+                }
+              ],
+              "1.RVCOperationalState.PhaseList": [
+                "Mapping",
+                "SeekingCharger",
+                "Docked"
+              ],
+              "1.RVCRunMode.ClusterRevision": 3,
+              "1.RVCRunMode.CurrentMode": 1,
+              "1.RVCRunMode.FeatureMap": 0,
+              "1.RVCRunMode.SupportedModes": [
+                {
+                  "Label": "Idle",
+                  "Mode": 1,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "Label": "Vacuum",
+                  "Mode": 2,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "Label": "Mapping",
+                  "Mode": 3,
+                  "ModeTags": [
+                    16386
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "device_id": "living_room_window_covering_controller_1",
+            "device_type": "window_covering_controller",
+            "attributes": {
+              "0.BasicInformation.ProductID": 10,
+              "0.BasicInformation.ProductName": "Window Covering Controller",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.WindowCovering.ConfigStatus": 1,
+              "1.WindowCovering.CurrentPositionLiftPercent100ths": 2509,
+              "1.WindowCovering.EndProductType": 0,
+              "1.WindowCovering.Mode": 1,
+              "1.WindowCovering.NumberOfActuationsLift": 20,
+              "1.WindowCovering.OperationalStatus": 0,
+              "1.WindowCovering.SafetyStatus": 0,
+              "1.WindowCovering.TargetPositionLiftPercent100ths": 2509,
+              "1.WindowCovering.Type": 0
+            }
+          }
+        ],
+        "state": {
+          "humidity": 4101.455697554591,
+          "illuminance": 827.91,
+          "pm10": 50.22,
+          "temperature": 2914.0
+        }
+      },
+      "utility_room": {
+        "devices": [
+          {
+            "device_id": "utility_room_air_purifier_1",
+            "device_type": "air_purifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 2,
+              "0.BasicInformation.ProductName": "Air Purifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.Descriptor.ClientList": [],
+              "1.Descriptor.DeviceTypeList": [
+                {
+                  "DeviceType": 45,
+                  "Revision": 1
+                }
+              ],
+              "1.Descriptor.PartsList": [],
+              "1.Descriptor.ServerList": [
+                29,
+                3,
+                514
+              ],
+              "1.Descriptor.TagList": [],
+              "1.FanControl.FanMode": 2,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 43,
+              "1.FanControl.PercentSetting": 43,
+              "1.Identify.ClusterRevision": 5,
+              "1.Identify.FeatureMap": 0,
+              "1.Identify.IdentifyTime": 0,
+              "1.Identify.IdentifyType": 2,
+              "1.OnOff.OnOff": true
+            }
+          },
+          {
+            "device_id": "utility_room_dehumidifier_1",
+            "device_type": "dehumidifier",
+            "attributes": {
+              "0.BasicInformation.ProductID": 7,
+              "0.BasicInformation.ProductName": "Dehumidifier",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.FanControl.FanMode": 1,
+              "1.FanControl.FanModeSequence": 1,
+              "1.FanControl.PercentCurrent": 11,
+              "1.FanControl.PercentSetting": 11,
+              "1.OnOff.OnOff": true,
+              "2.RelativeHumidityMeasurement.MaxMeasuredValue": 9500,
+              "2.RelativeHumidityMeasurement.MeasuredValue": 3979,
+              "2.RelativeHumidityMeasurement.MinMeasuredValue": 1000,
+              "2.RelativeHumidityMeasurement.Tolerance": null
+            }
+          },
+          {
+            "device_id": "utility_room_laundry_dryer_1",
+            "device_type": "laundry_dryer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 128,
+              "0.BasicInformation.ProductName": "Laundry Dryer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Generic Vendor",
+              "1.LaundryDryerControls.SelectedDrynessLevel": 1,
+              "1.LaundryDryerControls.SupportedDrynessLevels": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "1.OnOff.OnOff": true,
+              "1.OperationalState.CountdownTime": 2665,
+              "1.OperationalState.CurrentPhase": 0,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 1,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Heating",
+                "Drying",
+                "CoolDown",
+                "Complete"
+              ]
+            }
+          },
+          {
+            "device_id": "utility_room_laundry_washer_1",
+            "device_type": "laundry_washer",
+            "attributes": {
+              "0.BasicInformation.ProductID": 81,
+              "0.BasicInformation.ProductName": "Laundry Washer",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "Samsung Electronics",
+              "1.LaundryWasherControls.NumberOfRinses": 1,
+              "1.LaundryWasherControls.SpinSpeedCurrent": 1,
+              "1.LaundryWasherControls.SpinSpeeds": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "1.LaundryWasherControls.SupportedRinses": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "1.LaundryWasherMode.CurrentMode": 0,
+              "1.LaundryWasherMode.SupportedModes": [
+                {
+                  "label": "Normal",
+                  "mode": 0,
+                  "ModeTags": [
+                    16384
+                  ]
+                },
+                {
+                  "label": "Delicate",
+                  "mode": 1,
+                  "ModeTags": [
+                    16385
+                  ]
+                },
+                {
+                  "label": "Heavy",
+                  "mode": 2,
+                  "ModeTags": [
+                    16386
+                  ]
+                },
+                {
+                  "label": "Whites",
+                  "mode": 3,
+                  "ModeTags": [
+                    16387
+                  ]
+                },
+                {
+                  "label": "Quick Normal",
+                  "mode": 4,
+                  "ModeTags": [
+                    1,
+                    16384
+                  ]
+                },
+                {
+                  "label": "Heavy Whites",
+                  "mode": 5,
+                  "ModeTags": [
+                    16386,
+                    16387
+                  ]
+                }
+              ],
+              "1.OnOff.OnOff": false,
+              "1.OperationalState.CountdownTime": null,
+              "1.OperationalState.CurrentPhase": null,
+              "1.OperationalState.OperationalError": {
+                "error_state_id": 0
+              },
+              "1.OperationalState.OperationalState": 0,
+              "1.OperationalState.OperationalStateList": [
+                {
+                  "operational_state_id": 0
+                },
+                {
+                  "operational_state_id": 1
+                },
+                {
+                  "operational_state_id": 2
+                },
+                {
+                  "operational_state_id": 3
+                }
+              ],
+              "1.OperationalState.PhaseList": [
+                "Pre-wash",
+                "Main wash",
+                "Rinse",
+                "Spin",
+                "Complete"
+              ],
+              "1.TemperatureControl.MaxTemperature": 9500,
+              "1.TemperatureControl.MinTemperature": 500,
+              "1.TemperatureControl.TemperatureSetpoint": 2000
+            }
+          },
+          {
+            "device_id": "utility_room_on_off_light_1",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          },
+          {
+            "device_id": "utility_room_on_off_light_2",
+            "device_type": "on_off_light",
+            "attributes": {
+              "0.BasicInformation.ProductID": 4,
+              "0.BasicInformation.ProductName": "On/Off Light",
+              "0.BasicInformation.VendorID": 1,
+              "0.BasicInformation.VendorName": "LG Electronics",
+              "1.OnOff.OnOff": false
+            }
+          }
+        ],
+        "state": {
+          "humidity": 3979.5321443387934,
+          "illuminance": 667.23,
+          "pm10": 67.38805220938454,
+          "temperature": 2823.0
+        }
+      }
+    }
+  }
+}
