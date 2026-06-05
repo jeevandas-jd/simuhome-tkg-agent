@@ -14,8 +14,8 @@ import json
 import uuid
 from typing import Any, Optional
 
-from tkg_agent.graph.neo4j_client import Neo4jClient
-
+#from tkg_agent.graph.neo4j_client import Neo4jClient
+from tkg_agent.graph.graphiti_client import GraphitiClient as Neo4jClient
 
 # ── Unit conversions (SimuHome raw → human readable) ──────────────────────────
 
