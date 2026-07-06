@@ -64,7 +64,8 @@ def _load_episode_into_simulator(episode: dict) -> bool:
 
 def _make_llm():
     #from tkg_agent.agent.groq_provider import GroqProvider
-    from tkg_agent.agent.kaggle_provider import KaggleProvider as GroqProvider
+    #from tkg_agent.agent.kaggle_provider import KaggleProvider as GroqProvider
+    from tkg_agent.agent.gemini_provider import GeminiProvider as GroqProvider
     return GroqProvider()
 
 """def _make_llm():
