@@ -102,10 +102,10 @@ def _print_result(result, label: str, color: str = "green"):
         thought = step.thought or ""
         console.print(f"  Step {step.step}: [cyan]{step.action}[/cyan]")
         if thought:
-            console.print(f"    Thought: {thought[:120]}{'...' if len(thought)>120 else ''}")
+            console.print(f"    Thought: {thought}{'...' if len(thought)>120 else ''}")
         if step.observation:
             obs_str = json.dumps(step.observation)
-            console.print(f"    Obs: {obs_str[:100]}{'...' if len(obs_str)>100 else ''}")
+            console.print(f"    Obs: {obs_str}{'...' if len(obs_str)>100 else ''}")
 
     console.print(Panel(
         result.final_answer,
