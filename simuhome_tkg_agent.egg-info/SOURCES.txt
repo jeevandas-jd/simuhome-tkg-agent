@@ -9,6 +9,9 @@ simuhome_tkg_agent.egg-info/top_level.txt
 tkg_agent/__init__.py
 tkg_agent/agent/__init__.py
 tkg_agent/agent/base_agent.py
+tkg_agent/agent/gemini_provider.py
+tkg_agent/agent/groq_provider.py
+tkg_agent/agent/kaggle_provider.py
 tkg_agent/agent/tkg_agent.py
 tkg_agent/demo/__init__.py
 tkg_agent/demo/app.py
@@ -16,6 +19,7 @@ tkg_agent/eval/__init__.py
 tkg_agent/eval/evaluator.py
 tkg_agent/eval/metrics.py
 tkg_agent/graph/__init__.py
+tkg_agent/graph/graphiti_client.py
 tkg_agent/graph/neo4j_client.py
 tkg_agent/graph/schema.py
 tkg_agent/ingestor/__init__.py

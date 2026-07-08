@@ -50,7 +50,7 @@ class EpisodeIngestor:
 
     # ── Public: bootstrap from initial_home_config ────────────────────────────
 
-    def bootstrap(self, episode: dict) -> str:
+    def bootstrap(self, episode: dict, clear=True) -> str:
         """
         Parse initial_home_config and write all initial facts to the graph.
         Returns the episode_id (used for all subsequent writes in this run).
@@ -62,7 +62,9 @@ class EpisodeIngestor:
         episode_id = f"{meta['query_type']}_{meta['case']}_seed{meta['seed']}"
 
         # Clear any previous facts for this episode (idempotent re-runs)
-        self.db.clear_episode(episode_id)
+        if clear:
+            
+            self.db.clear_episode(episode_id)
 
         # Write episode node
         self.db.write_episode(
