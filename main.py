@@ -63,9 +63,9 @@ def _load_episode_into_simulator(episode: dict) -> bool:
 
 
 def _make_llm():
-    #from tkg_agent.agent.groq_provider import GroqProvider
+    from tkg_agent.agent.groq_provider import GroqProvider
     #from tkg_agent.agent.kaggle_provider import KaggleProvider as GroqProvider
-    from tkg_agent.agent.gemini_provider import GeminiProvider as GroqProvider
+    #from tkg_agent.agent.gemini_provider import GeminiProvider as GroqProvider
     return GroqProvider()
 
 """def _make_llm():
@@ -189,6 +189,42 @@ def run(
         console.print(f"[red]Agent failed: {e}[/red]")
         import traceback; traceback.print_exc()
 
+@app.command()
+
+def chainQueries(episode: str = typer.Option(..., "--episode", "-e", help="Path to episode JSON"),
+    max_steps: int = typer.Option(20, "--max-steps")):
+
+    ep=_load_episode(episode)
+    _print_episode_header(ep)
+    _load_episode_into_simulator(ep)
+    llm = _make_llm()
+
+    from tkg_agent.agent.tkg_agent import TKGReActAgent
+    db = _make_db()
+    tkg_agent = TKGReActAgent(llm, db, max_steps=max_steps)
+    console.print(f"\n[bold]Running TKG Agent for chain of queries...[/bold]\n")
+    
+    quey=input("Enter the query: ")
+    while quey.lower()!="exit":
+        try:
+            result = tkg_agent.run(
+                quey,
+                user_location=ep.get("user_location"),
+                current_time=ep["initial_home_config"].get("base_time"),
+                episode=ep,
+            )
+            metrics = tkg_agent.get_tkg_metrics()
+            console.print(f"\n[bold]TKG Metrics:[/bold]")
+            console.print(f"  Graph hits:    {metrics['graph_hits']}")
+            console.print(f"  Graph misses:  {metrics['graph_misses']}")
+            console.print(f"  Facts written: {metrics['facts_written']}")
+            _print_result(result, "TKG Agent", "green")
+        except Exception as e:
+            console.print(f"[red]Agent failed: {e}[/red]")
+            import traceback; traceback.print_exc()
+        quey=input("\nEnter the query (or type 'exit' to quit): ")
+    #you can run this command using the following command in terminal
+    #python main.py chain-of-queries --episode simuhome/data/benchmark/qt1_feasible_seed_23.json --max-steps 20
 
 @app.command()
 def compare(
